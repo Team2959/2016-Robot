@@ -11,21 +11,21 @@
 #include <Commands/Subsystem.h>
 #include "Joystick.h"
 #include "RobotDrive.h"
-#include "TalonSRX.h"
+#include "CanTalonSRX.h"
 
 class DriveTrain: public frc::Subsystem {
 private:
 
-	frc::TalonSRX LeftFrontDriveMotor {5};
-	frc::TalonSRX LeftBackDriveMotor {6};
-	frc::TalonSRX RightFrontDriveMotor {1};
-	frc::TalonSRX RightBackDriveMotor {2};
+	CanTalonSRX LeftFrontDriveMotor {5};
+	CanTalonSRX LeftBackDriveMotor {6};
+	CanTalonSRX RightFrontDriveMotor {1};
+	CanTalonSRX RightBackDriveMotor {2};
 
-	frc::RobotDrive TankDrive
-{LeftFrontDriveMotor,
-LeftBackDriveMotor,
-RightFrontDriveMotor,
-RightBackDriveMotor};
+	frc::RobotDrive DriveTank
+{&LeftFrontDriveMotor,
+&LeftBackDriveMotor,
+&RightFrontDriveMotor,
+&RightBackDriveMotor};
 
 public:
 	DriveTrain();
@@ -36,7 +36,6 @@ public:
 	void TankDrive(double leftSide, double rightSide);
 	void TankDrive(frc::Joystick * pJoyStick);
 	void Stop();
-
 };
 
 #endif /* SRC_SUBSYSTEMS_DRIVETRAIN_H_ */

@@ -32,5 +32,9 @@ void DriveTrain::TankDrive(frc::Joystick*pJoystick)
 void DriveTrain::Stop()
 {
 	TankDrive(0.0, 0.0);
-	//m_TankDrive.TankDrive(0.0, 0.0, false);
+}
+
+void DriveTrain::TankDrive(double leftSide, double rightSide)
+{
+	DriveTank.TankDrive(leftSide, rightSide, false);
 }
