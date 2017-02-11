@@ -11,7 +11,7 @@
 #include <Commands/Subsystem.h>
 #include "Joystick.h"
 #include "CanTalonSRX.h"
-#include <CanTalonSRXRobotDrive.h>
+#include <CanRobotDrive.h>
 
 class DriveTrain: public frc::Subsystem
 {
@@ -26,7 +26,7 @@ private:
 	CanTalonSRX Right2MotorController
 	{ 2 };
 
-	CanTalonSRXRobotDrive DriveTank
+	CanRobotDrive DriveTank
 	{
 		&Left1MotorController,
 		&Left2MotorController,

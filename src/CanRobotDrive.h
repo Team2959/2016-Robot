@@ -8,45 +8,56 @@
 #ifndef SRC_CANROBOTDRIVE_H_
 #define SRC_CANROBOTDRIVE_H_
 
+#include <memory>
 #include <ErrorBase.h>
 #include <MotorSafety.h>
+#include <MotorSafetyHelper.h>
+#include <CanTalonSRX.h>
 
-class CanRobotDrive: public frc::ErrorBase, public frc::MotorSafety
-{
+class CanRobotDrive: public frc::ErrorBase, public frc::MotorSafety {
 public:
-	CanRobotDrive(CanTalonSRX & LeftFrontMotor,
-			CanTalonSRX & RightFrontMotor,
-			CanTalonSRX & LeftBackMotor,
-			CanTalonSRX & RightBackMotor);
-	virtual ~CanRobotDrive() = default;
+	CanRobotDrive(CanTalonSRX * leftMotor1, CanTalonSRX * leftMotor2,
+			CanTalonSRX * rightMotor1, CanTalonSRX * rightMotor2,
+			bool invertLeftSide, bool invertRightSide);
+	CanRobotDrive(CanTalonSRX * leftMotor1, CanTalonSRX * leftMotor2,
+			CanTalonSRX * leftMotor3, CanTalonSRX * rightMotor1,
+			CanTalonSRX * rightMotor2, CanTalonSRX * rightMotor3,
+			bool invertLeftSide, bool invertRightSide);
+	virtual ~CanRobotDrive();
+
+	CanRobotDrive(const CanRobotDrive&) = delete;
+	CanRobotDrive& operator=(const CanRobotDrive&) = delete;
 
 	void TankDrive(double leftSide, double rightSide);
 
-protected:
- void InitRobotDrive();
- double Limit(double num);
- void Normalize(double* wheelSpeeds);
- void RotateVector(double& x, double& y, double angle);
-
- static const int kMaxNumberOfMotors = 4;
- double m_sensitivity = 0.5;
- double m_maxOutput = 1.0;
- std::shared_ptr<CanTalonSRX> m_frontLeftMotor;
- std::shared_ptr<CanTalonSRX> m_frontRightMotor;
- std::shared_ptr<CanTalonSRX> m_rearLeftMotor;
- std::shared_ptr<CanTalonSRX> m_rearRightMotor;
- std::unique_ptr<MotorSafetyHelper> m_safetyHelper;
+	void SetExpiration(double timeout) override;
+	double GetExpiration() const override;
+	bool IsAlive() const override;
+	void StopMotor() override;
+	bool IsSafetyEnabled() const override;
+	void SetSafetyEnabled(bool enabled) override;
+	void GetDescription(std::ostringstream& desc) const override;
 
 private:
- int GetNumMotors() {
-   int motors = 0;
-   if (m_frontLeftMotor) motors++;
-   if (m_frontRightMotor) motors++;
-   if (m_rearLeftMotor) motors++;
-   if (m_rearRightMotor) motors++;
-   return motors;
- }
-};
+	int GetNumMotors();
+	void InitRobotDrive(CanTalonSRX * leftMotor1, CanTalonSRX * leftMotor2,
+			CanTalonSRX * leftMotor3, CanTalonSRX * rightMotor1,
+			CanTalonSRX * rightMotor2, CanTalonSRX * rightMotor3,
+			bool invertLeftSide, bool invertRightSide);
+	double Limit(double num);
 
+	static const int kMaxNumberOfMotors = 6;
+
+	std::shared_ptr<CanTalonSRX> m_leftMotor1;
+	std::shared_ptr<CanTalonSRX> m_leftMotor2;
+	std::shared_ptr<CanTalonSRX> m_leftMotor3;
+	std::shared_ptr<CanTalonSRX> m_rightMotor1;
+	std::shared_ptr<CanTalonSRX> m_rightMotor2;
+	std::shared_ptr<CanTalonSRX> m_rightMotor3;
+	MotorSafetyHelper * m_safetyHelper;
+
+	bool m_invertLeftSide;
+	bool m_invertRightSide;
+};
 
 #endif /* SRC_CANROBOTDRIVE_H_ */
