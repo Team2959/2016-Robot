@@ -10,22 +10,29 @@
 
 #include <Commands/Subsystem.h>
 #include "Joystick.h"
-#include "RobotDrive.h"
 #include "CanTalonSRX.h"
+#include <CanTalonSRXRobotDrive.h>
 
-class DriveTrain: public frc::Subsystem {
+class DriveTrain: public frc::Subsystem
+{
 private:
 
-	CanTalonSRX LeftFrontDriveMotor {5};
-	CanTalonSRX LeftBackDriveMotor {6};
-	CanTalonSRX RightFrontDriveMotor {1};
-	CanTalonSRX RightBackDriveMotor {2};
+	CanTalonSRX Left1MotorController
+	{ 5 };
+	CanTalonSRX Left2MotorController
+	{ 6 };
+	CanTalonSRX Right1MotorController
+	{ 1 };
+	CanTalonSRX Right2MotorController
+	{ 2 };
 
-	frc::RobotDrive DriveTank
-{&LeftFrontDriveMotor,
-&LeftBackDriveMotor,
-&RightFrontDriveMotor,
-&RightBackDriveMotor};
+	CanTalonSRXRobotDrive DriveTank
+	{
+		&Left1MotorController,
+		&Left2MotorController,
+		&Right1MotorController,
+		&Right2MotorController,
+		false, true };
 
 public:
 	DriveTrain();

@@ -9,14 +9,12 @@
 #include "Commands/DriveWithJoystick.h"
 
 DriveTrain::DriveTrain() :
-frc::Subsystem("DriveTrain")
+		frc::Subsystem("DriveTrain")
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-DriveTrain::~DriveTrain() {
-	// TODO Auto-generated destructor stub
+DriveTrain::~DriveTrain()
+{
 }
 
 void DriveTrain::InitDefaultCommand()
@@ -36,5 +34,5 @@ void DriveTrain::Stop()
 
 void DriveTrain::TankDrive(double leftSide, double rightSide)
 {
-	DriveTank.TankDrive(leftSide, rightSide, false);
+	DriveTank.TankDrive(leftSide, rightSide);
 }

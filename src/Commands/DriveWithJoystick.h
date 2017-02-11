@@ -10,7 +10,8 @@
 
 #include <CommandBase.h>
 
-class DriveWithJoystick: public CommandBase {
+class DriveWithJoystick: public CommandBase
+{
 public:
 	DriveWithJoystick();
 	virtual ~DriveWithJoystick();

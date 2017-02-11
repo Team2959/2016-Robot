@@ -7,7 +7,6 @@
 #include <Commands/Command.h>
 
 #include "OI.h"
-#include "Subsystems/ExampleSubsystem.h"
 #include "Subsystems/DriveTrain.h"
 
 /**
@@ -16,16 +15,15 @@
  * subsystem elsewhere in your code in your code use
  * CommandBase::exampleSubsystem
  */
-class CommandBase: public frc::Command {
+class CommandBase: public frc::Command
+{
 public:
 	CommandBase(const std::string& name);
 	CommandBase() = default;
 
 	// Create a single static instance of all of your subsystems
-	static std::unique_ptr<ExampleSubsystem> exampleSubsystem;
 	static std::unique_ptr<OI> oi;
 	static std::unique_ptr<DriveTrain> DriveTrainSubsystem;
-
 };
 
 #endif  // COMMAND_BASE_H

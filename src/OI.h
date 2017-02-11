@@ -2,12 +2,13 @@
 #define OI_H
 #include <Joystick.h>
 
-class OI {
+class OI
+{
 public:
 	OI();
-	frc::Joystick DriverJoystick
-		{ 0 };
 
+	frc::Joystick DriverJoystick
+	{ 0 };
 };
 
 #endif  // OI_H

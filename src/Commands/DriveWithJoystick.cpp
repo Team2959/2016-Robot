@@ -8,15 +8,13 @@
 #include <Commands/DriveWithJoystick.h>
 
 DriveWithJoystick::DriveWithJoystick() :
-CommandBase("DriveWithJoystick")
+		CommandBase("DriveWithJoystick")
 {
 	Requires(DriveTrainSubsystem.get());
-	// TODO Auto-generated constructor stub
-
 }
 
-DriveWithJoystick::~DriveWithJoystick() {
-	// TODO Auto-generated destructor stub
+DriveWithJoystick::~DriveWithJoystick()
+{
 }
 
 void DriveWithJoystick::Execute()
@@ -28,4 +26,3 @@ bool DriveWithJoystick::IsFinished()
 {
 	return false;
 }
-
