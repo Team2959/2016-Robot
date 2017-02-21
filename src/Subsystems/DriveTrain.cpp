@@ -11,6 +11,10 @@
 DriveTrain::DriveTrain() :
 		frc::Subsystem("DriveTrain")
 {
+	DriveTank.SetSafetyEnabled(true);
+	DriveTank.SetExpiration(0.1);
+	DriveTank.SetSensitivity(0.5);
+	DriveTank.SetMaxOutput(1.0);
 	DriveTank.SetInvertedMotor(frc::RobotDrive::kFrontLeftMotor, false);
 	DriveTank.SetInvertedMotor(frc::RobotDrive::kRearLeftMotor, false);
 	DriveTank.SetInvertedMotor(frc::RobotDrive::kFrontRightMotor, true);
