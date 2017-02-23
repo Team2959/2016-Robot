@@ -6,11 +6,11 @@
  */
 
 #include <Commands/DriveWithJoystick.h>
+#include <Robot.h>
 
-DriveWithJoystick::DriveWithJoystick() :
-		CommandBase("DriveWithJoystick")
+DriveWithJoystick::DriveWithJoystick() : Command("DriveWithJoystick")
 {
-	Requires(DriveTrainSubsystem.get());
+	Requires(Robot::DriveTrainSubsystem.get());
 }
 
 DriveWithJoystick::~DriveWithJoystick()
@@ -19,7 +19,7 @@ DriveWithJoystick::~DriveWithJoystick()
 
 void DriveWithJoystick::Execute()
 {
-	DriveTrainSubsystem->TankDrive(&oi->DriverJoystick);
+	Robot::DriveTrainSubsystem->TankDrive(Robot::oi->GetDriverJoystick());
 }
 
 bool DriveWithJoystick::IsFinished()

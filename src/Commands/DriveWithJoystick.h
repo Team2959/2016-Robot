@@ -8,9 +8,9 @@
 #ifndef SRC_COMMANDS_DRIVEWITHJOYSTICK_H_
 #define SRC_COMMANDS_DRIVEWITHJOYSTICK_H_
 
-#include <CommandBase.h>
+#include <Commands/Command.h>
 
-class DriveWithJoystick: public CommandBase
+class DriveWithJoystick: public Command
 {
 public:
 	DriveWithJoystick();
